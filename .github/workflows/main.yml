@@ -1,0 +1,14 @@
+on:
+  push
+
+jobs:
+  git-tag-test:
+    name: Test a git command
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: FranzDiebold/github-env-vars-action@v1.2.0
+    - name: Run the command
+      run: |
+        echo $GITHUB_REF_NAME
+        echo $(git tag -l --format='%(contents)' ${GITHUB_REF_NAME})
